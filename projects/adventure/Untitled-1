@@ -1,0 +1,25 @@
+
+
+
+Lecture Day 1 Notes:
+
+- What operations would we want to run using Graph?
+
+Network = Graph 
+
+A: You might find where you may attack a network (Find weak part)
+A: Find Shortest Path 
+A: Search 
+A: Store information from nodes 
+A: Iterate over all nodes & perform a function on each node 
+A: There are a lot of things you may want to use a network for 
+-------------------------------------------------------------------
+
+Stack Traversals - are Linear in Time Complexity 
+
+Breadth First Traversal - Using Queue - First In/ First Out - Linear in Time Complexity
+We select a current_node, check its friends, then deque current_node unitl empty array 
+(Queue/ Dequeue) 
+
+
+

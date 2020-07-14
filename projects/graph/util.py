@@ -13,6 +13,10 @@ class Queue():
     def size(self):
         return len(self.queue)
 
+        # Its O(n) to Pop from a front of the array
+        # This should be constant time O(1)
+        # For the size of stuff we are doing it is fine
+
 class Stack():
     def __init__(self):
         self.stack = []
