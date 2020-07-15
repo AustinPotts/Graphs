@@ -48,8 +48,9 @@ def earliest_ancestor(ancestors, starting_node):
 
 
 
-# We need a base case 
-
+# What is our node? When does our node have a connection?
+# Nodes are people 
+# Nodes are connected when th
 
 
 
