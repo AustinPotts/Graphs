@@ -1,6 +1,3 @@
-"""
-Simple graph implementation
-"""
 from util import Stack, Queue  # These may come in handy
 
 class Graph():
@@ -87,7 +84,6 @@ class Graph():
 
     def dft_recursive(self, starting_vertex, visited = None):
         # create the base case
-        # 
         # if vertex hasnt been visited, create a new set, add the starting vertex
         if not visited:
             visited = set()
@@ -186,13 +182,13 @@ class Graph():
         # else use the set and path passed in as parameters
         if not visited:
             visited = set()
-        if not path: # path is an empty list 
+        if not path:
             path = []
 
         # add starting vertex to the visited set
         # and add the vertex passed in to any vertices already in the list
         visited.add(starting_vertex)
-        path = path + [starting_vertex] # add starting vertix to path 
+        path = path + [starting_vertex]
 
         # if the starting vertex and the destination are the same, return the path
         if starting_vertex == destination_vertex:
@@ -205,11 +201,59 @@ class Graph():
         for vert in self.vertices[starting_vertex]:
             if vert not in visited:
                 path_copy = self.dfs_recursive(vert, destination_vertex, visited, path)
-                if path_copy: # if its not none
-                    return path_copy # return the path
+                if path_copy:
+                    return path_copy
 
         # if we get here, there was no path so return None 
         return None
+
+     
+     # We need a Depth First Search to return the longest path to find the ancestor
+    def find_earliest_ancestor(self, start):
+        # once again we create a stack
+        s = Stack()
+
+        # push the starting vertex(node) to the stack
+        # create the visited set to keep track of the visited nodes
+        # create the path to hold the longest path 
+        s.push([start])
+        visited = set()
+        path = [start]
+
+        # check stack, while the stack still holds items
+        while s.size() > 0:
+            # create an inner path by popping a value from the stack
+            inner_path = s.pop()
+            vert = inner_path[-1] # grab the vertex from the last index of the list
+
+            # if the vertex hasn't been visited,
+            # add it to the set
+            if vert not in visited:
+                visited.add(vert)
+
+                # loop through all remaining neighbors
+                # create copy of inner path
+                # append the vertex to the copy
+                # push the path copy to the stack for all neighbors
+                for next_vert in self.get_neighbors(vert):
+                    path_copy = list(inner_path) # you want to make a new copy each time
+                    # copy path so we dont mutate the original path 
+                    path_copy.append(next_vert) # copy append neighbor, make new copy for each neighbor
+
+                    s.push(path_copy) # push copy to the stack 
+
+                    # if the path copy and the longest path contain the same number of values
+                    # set the longest path equal to the path copy
+                    if len(path_copy) > len(path):
+                        path = path_copy
+
+                    # if the paths lengths are equal, and the last elements of the lists are different,
+                    # set the longest path equal to the path copy
+                    if len(path_copy) == len(path) and path_copy[-1] != path[-1]:
+                        path = path_copy
+
+        # return the resulting path
+        return path    
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
