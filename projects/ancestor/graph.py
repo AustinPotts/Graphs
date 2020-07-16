@@ -1,6 +1,8 @@
 from util import Stack, Queue  # These may come in handy
 
 class Graph():
+
+    # This is all you need to build a simple graph
     def __init__(self):
         # create a dictionary(hashtable) to hold the vertices of the graph
         self.vertices = {}
